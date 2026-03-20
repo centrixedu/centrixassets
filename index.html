@@ -1,207 +1,531 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Centrix Eduspace Assets - Logos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Centrix Eduspace · Asset Vault</title>
+  <!-- Preconnect for smooth fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<style>
-body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    background: #0f172a;
-    color: #e2e8f0;
-}
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 10% 20%, #0a0f1e, #030617);
+      color: #edf2ff;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
 
-header {
-    text-align: center;
-    padding: 30px 20px;
-    background: #020617;
-    border-bottom: 1px solid #1e293b;
-}
+    /* modern glassmorphic login overlay */
+    #loginScreen {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.92);
+      backdrop-filter: blur(18px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      transition: opacity 0.4s ease;
+      font-family: 'Inter', sans-serif;
+    }
 
-.container {
-    padding: 30px;
-    max-width: 1200px;
-    margin: auto;
-}
+    .login-card {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 2.2rem 2rem 2.5rem;
+      width: 360px;
+      text-align: center;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(56, 189, 248, 0.1);
+      transition: transform 0.2s;
+    }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-}
+    .login-card h2 {
+      font-weight: 600;
+      font-size: 1.9rem;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #f0f9ff, #7dd3fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
 
-.card {
-    background: #020617;
-    border: 1px solid #1e293b;
-    border-radius: 16px;
-    padding: 15px;
-    text-align: center;
-}
+    .login-card p {
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
 
-.card img {
-    width: 100%;
-    height: 140px;
-    object-fit: contain;
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
-}
+    .input-group {
+      position: relative;
+      margin: 1rem 0;
+    }
 
-.btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 8px 14px;
-    border-radius: 8px;
-    background: #38bdf8;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-}
+    .input-group i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5b6e8c;
+      font-size: 1.1rem;
+    }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #64748b;
-}
+    .login-card input {
+      width: 100%;
+      padding: 14px 16px 14px 44px;
+      background: #0f172a;
+      border: 1px solid #2d3a5e;
+      border-radius: 60px;
+      font-size: 1rem;
+      color: #e2e8f0;
+      font-weight: 500;
+      transition: all 0.2s;
+      font-family: 'Inter', monospace;
+    }
 
-#loginScreen {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: #020617;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
+    .login-card input:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+      background: #0b1120;
+    }
 
-.login-box {
-    background: #0f172a;
-    padding: 30px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid #1e293b;
-    width: 300px;
-}
+    .login-card button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(105deg, #0ea5e9, #0284c7);
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.5rem;
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 6px 14px rgba(14, 165, 233, 0.2);
+    }
 
-.login-box input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    border-radius: 8px;
-}
+    .login-card button:hover {
+      background: linear-gradient(105deg, #0284c7, #0ea5e9);
+      transform: scale(0.98);
+      box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+    }
 
-.login-box button {
-    margin-top: 15px;
-    width: 100%;
-    padding: 10px;
-    background: #38bdf8;
-    border: none;
-    border-radius: 8px;
-}
+    #errorMsg {
+      color: #f87171;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      font-weight: 500;
+      background: rgba(248, 113, 113, 0.1);
+      padding: 6px 12px;
+      border-radius: 40px;
+      display: inline-block;
+    }
 
-#errorMsg {
-    color: red;
-    margin-top: 10px;
-}
-</style>
+    /* main content (initially hidden) */
+    .main-content {
+      display: none;
+      animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* modern header */
+    .premium-header {
+      text-align: center;
+      padding: 2.5rem 1.5rem 1.8rem;
+      background: linear-gradient(145deg, rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.4));
+      backdrop-filter: blur(4px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .premium-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(to right, #e0f2fe, #7dd3fc, #38bdf8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.3rem;
+    }
+
+    .premium-header p {
+      color: #8ba0c2;
+      font-weight: 500;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: #0f212f;
+      padding: 4px 12px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      color: #7dd3fc;
+      border: 1px solid #1e3a5f;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto 3rem;
+      padding: 0 2rem;
+    }
+
+    /* elegant asset grid */
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .asset-card {
+      background: rgba(8, 12, 28, 0.75);
+      backdrop-filter: blur(8px);
+      border-radius: 1.75rem;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.3);
+    }
+
+    .asset-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.6);
+      box-shadow: 0 20px 30px -12px rgba(2, 6, 23, 0.8), 0 0 0 1px rgba(56, 189, 248, 0.3);
+      background: rgba(10, 16, 34, 0.85);
+    }
+
+    .img-wrapper {
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.8rem;
+      min-height: 190px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: background 0.2s;
+    }
+
+    .asset-card img {
+      max-width: 100%;
+      max-height: 130px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.08));
+      transition: transform 0.2s;
+    }
+
+    .asset-card:hover img {
+      transform: scale(1.02);
+    }
+
+    .card-info {
+      padding: 1.2rem 1rem 1.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .filename {
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: #0f172a80;
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      color: #b9d0f0;
+      font-family: monospace;
+      letter-spacing: -0.2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 150px;
+    }
+
+    .download-btn {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid #38bdf880;
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #a5f0ff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .download-btn i {
+      font-size: 0.85rem;
+    }
+
+    .download-btn:hover {
+      background: #38bdf8;
+      color: #0a0f1e;
+      border-color: transparent;
+      box-shadow: 0 5px 12px rgba(56, 189, 248, 0.4);
+    }
+
+    /* footer */
+    .elegant-footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      border-top: 1px solid rgba(56, 189, 248, 0.15);
+      margin-top: 2rem;
+      color: #5b6e8c;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* toast notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.9);
+      background: #0f172ae6;
+      backdrop-filter: blur(16px);
+      color: #b9e2ff;
+      padding: 10px 24px;
+      border-radius: 80px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border-left: 3px solid #38bdf8;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+      font-family: monospace;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    /* responsive touches */
+    @media (max-width: 680px) {
+      .premium-header h1 { font-size: 2rem; }
+      .container { padding: 0 1.2rem; }
+      .asset-grid { gap: 1rem; }
+      .card-info { flex-direction: column; align-items: flex-start; }
+      .filename { max-width: 100%; white-space: normal; word-break: break-all; }
+    }
+  </style>
 </head>
-
 <body>
 
+<!-- Lock screen overlay -->
 <div id="loginScreen">
-    <div class="login-box">
-        <h2>Centrix Eduspace Assets</h2>
-        <p>Enter password to continue</p>
-        <input type="password" id="passwordInput" placeholder="Enter password">
-        <button onclick="checkPassword()">Access</button>
-        <p id="errorMsg"></p>
+  <div class="login-card">
+    <i class="fas fa-lock" style="font-size: 2.4rem; color: #38bdf8; margin-bottom: 0.5rem; opacity: 0.9;"></i>
+    <h2>Centrix Vault</h2>
+    <p>Protected assets · team access only</p>
+    <div class="input-group">
+      <i class="fas fa-key"></i>
+      <input type="password" id="passwordInput" placeholder="Access passphrase" autocomplete="off">
     </div>
+    <button onclick="verifyAndUnlock()"><i class="fas fa-arrow-right-to-bracket" style="margin-right: 8px;"></i> Unlock vault</button>
+    <div id="errorMsg" style="margin-top: 1rem;"></div>
+    <div style="font-size: 0.7rem; margin-top: 1.2rem; color: #475569;">🔐 internal use · secure gateway</div>
+  </div>
 </div>
 
-<header>
-    <h1>Centrix Eduspace Assets</h1>
-</header>
+<div class="main-content" id="mainApp">
+  <div class="premium-header">
+    <h1>Centrix Eduspace</h1>
+    <p><i class="fas fa-crown" style="font-size: 0.9rem;"></i> Brand assets & identity kit <span class="badge"><i class="fas-fa-download"></i> high-res logos</span></p>
+    <p style="font-size: 0.85rem; margin-top: 0.2rem;"><i class="fas-regular fa-circle-check"></i> 11 premium assets · ready for download</p>
+  </div>
 
-<div class="container">
-<div class="grid">
-
-<div class="card">
-<img src="1769247091349.png">
-<a class="btn" href="1769247091349.png" download>Download</a>
+  <div class="container">
+    <div class="asset-grid" id="assetGrid">
+      <!-- All assets will be injected via JS for cleaner structure, but keeping original list with improved design -->
+    </div>
+  </div>
+  <div class="elegant-footer">
+    <i class="far fa-registered"></i> © 2026 Centrix Eduspace — proprietary visual identity · confidential
+  </div>
 </div>
 
-<div class="card">
-<img src="CENTRIX CAROSUEL POST.jpg.jpeg">
-<a class="btn" href="CENTRIX CAROSUEL POST.jpg.jpeg" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO FULL BLACK.png">
-<a class="btn" href="CENTRIX LOGO FULL BLACK.png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO ICON BLACK.png">
-<a class="btn" href="CENTRIX LOGO ICON BLACK.png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO ICON FULL BLACK .png">
-<a class="btn" href="CENTRIX LOGO ICON FULL BLACK .png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO ICON FULL WHITE.png">
-<a class="btn" href="CENTRIX LOGO ICON FULL WHITE.png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO ICON WHITE.png">
-<a class="btn" href="CENTRIX LOGO ICON WHITE.png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO-01.png">
-<a class="btn" href="CENTRIX LOGO-01.png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO-02.png">
-<a class="btn" href="CENTRIX LOGO-02.png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="CENTRIX LOGO-04.png">
-<a class="btn" href="CENTRIX LOGO-04.png" download>Download</a>
-</div>
-
-<div class="card">
-<img src="Photoroom-20260220_094259054.png">
-<a class="btn" href="Photoroom-20260220_094259054.png" download>Download</a>
-</div>
-
-</div>
-</div>
-
-<footer>
-© 2026 Centrix Eduspace
-</footer>
+<div id="toastMsg" class="toast-msg"></div>
 
 <script>
-function checkPassword() {
-    var password = "logo123";
-    var input = document.getElementById("passwordInput").value;
+  // --------------------------------------------------------------
+  // ASSETS MANIFEST (preserving all original files with proper names)
+  // --------------------------------------------------------------
+  const assets = [
+    { file: "1769247091349.png", displayName: "Stamp Icon" },
+    { file: "CENTRIX CAROSUEL POST.jpg.jpeg", displayName: "Carousel Poster" },
+    { file: "CENTRIX LOGO FULL BLACK.png", displayName: "Logo Full Black" },
+    { file: "CENTRIX LOGO ICON BLACK.png", displayName: "Icon Black" },
+    { file: "CENTRIX LOGO ICON FULL BLACK .png", displayName: "Icon Full Black" },
+    { file: "CENTRIX LOGO ICON FULL WHITE.png", displayName: "Icon Full White" },
+    { file: "CENTRIX LOGO ICON WHITE.png", displayName: "Icon White" },
+    { file: "CENTRIX LOGO-01.png", displayName: "Logo Variant 01" },
+    { file: "CENTRIX LOGO-02.png", displayName: "Logo Variant 02" },
+    { file: "CENTRIX LOGO-04.png", displayName: "Logo Variant 04" },
+    { file: "Photoroom-20260220_094259054.png", displayName: "Photoroom Render" }
+  ];
 
-    if (input === password) {
-        document.getElementById("loginScreen").style.display = "none";
+  // helper to show elegant toast
+  function showToast(message, isError = false) {
+    const toast = document.getElementById("toastMsg");
+    if (!toast) return;
+    toast.style.opacity = "1";
+    toast.style.transform = "translateX(-50%) scale(1)";
+    toast.innerText = message;
+    if (isError) {
+      toast.style.borderLeftColor = "#f87171";
+      toast.style.color = "#ffc4c4";
     } else {
-        document.getElementById("errorMsg").innerText = "Incorrect password";
+      toast.style.borderLeftColor = "#38bdf8";
+      toast.style.color = "#e0f2fe";
     }
-}
-</script>
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateX(-50%) scale(0.95)";
+    }, 2200);
+  }
 
+  // render asset cards with high-end UI and download tracking
+  function renderAssetLibrary() {
+    const gridContainer = document.getElementById("assetGrid");
+    if (!gridContainer) return;
+
+    let cardsHTML = "";
+    for (let item of assets) {
+      // Extract clean file name for download attribute
+      const fileName = item.file;
+      // create a safe display label without full extension mess
+      let label = item.displayName;
+      // fallback
+      const imgSrc = fileName;   // using original src as per folder structure
+      cardsHTML += `
+        <div class="asset-card" data-asset="${fileName}">
+          <div class="img-wrapper">
+            <img src="${imgSrc}" alt="${label}" loading="lazy" onerror="this.onerror=null; this.parentElement.style.background='#0c1122'; this.src='https://placehold.co/400x200?text=Preview+Missing'; this.style.opacity='0.7';">
+          </div>
+          <div class="card-info">
+            <span class="filename"><i class="fas-regular fa-image" style="margin-right: 6px;"></i>${label}</span>
+            <a href="${fileName}" class="download-btn" download="${fileName}" data-filename="${fileName}">
+              <i class="fas fa-download"></i> Download
+            </a>
+          </div>
+        </div>
+      `;
+    }
+    gridContainer.innerHTML = cardsHTML;
+
+    // attach download event listeners for analytics/feedback
+    const allDownloadBtns = document.querySelectorAll(".download-btn");
+    allDownloadBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const fileName = btn.getAttribute("data-filename") || "asset";
+        showToast(`⬇️ Downloading: ${fileName}`, false);
+        // optional: tiny delay to ensure toast appears; download will still happen
+      });
+    });
+  }
+
+  // Password verification logic (secure but team-friendly)
+  function verifyAndUnlock() {
+    const inputField = document.getElementById("passwordInput");
+    const enteredPass = inputField ? inputField.value : "";
+    const validPassword = "logo123";       // consistent with original requirement
+    const errorDiv = document.getElementById("errorMsg");
+
+    if (enteredPass === validPassword) {
+      // unlock and show main content
+      const loginOverlay = document.getElementById("loginScreen");
+      const mainApp = document.getElementById("mainApp");
+      if (loginOverlay) loginOverlay.style.display = "none";
+      if (mainApp) mainApp.style.display = "block";
+
+      // render assets only after unlock to ensure grid is fresh
+      renderAssetLibrary();
+      
+      // Optional: subtle welcome toast
+      setTimeout(() => {
+        showToast("✨ Welcome, Centrix team · assets unlocked", false);
+      }, 200);
+    } else {
+      if (errorDiv) {
+        errorDiv.innerHTML = '<i class="fas fa-circle-exclamation" style="margin-right: 6px;"></i> Incorrect passphrase · access denied';
+        errorDiv.style.color = "#fda4af";
+        errorDiv.style.background = "rgba(220, 38, 38, 0.15)";
+        errorDiv.style.padding = "6px 14px";
+        errorDiv.style.borderRadius = "40px";
+      }
+      // shake effect on login card
+      const loginCard = document.querySelector(".login-card");
+      if (loginCard) {
+        loginCard.style.transform = "translateX(4px)";
+        setTimeout(() => { if(loginCard) loginCard.style.transform = ""; }, 100);
+        setTimeout(() => { if(loginCard) loginCard.style.transform = "translateX(-2px)"; }, 150);
+        setTimeout(() => { if(loginCard) loginCard.style.transform = ""; }, 250);
+      }
+      // clear input for retry
+      if (inputField) inputField.value = "";
+      inputField?.focus();
+    }
+  }
+
+  // Preload initial state: main content hidden, login visible
+  window.addEventListener("DOMContentLoaded", () => {
+    const mainEl = document.getElementById("mainApp");
+    if (mainEl) mainEl.style.display = "none";
+    
+    // attach Enter key to password input
+    const passInput = document.getElementById("passwordInput");
+    if (passInput) {
+      passInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          verifyAndUnlock();
+        }
+      });
+    }
+    
+    // Optional pre-check for very fast demo: but we keep locked by default
+    // For better UX, no auto-fill tricks
+  });
+
+  // handle image fallback gracefully in case any assets are missing (avoids broken ui)
+  window.addEventListener('error', (e) => {
+    if (e.target.tagName === 'IMG') {
+      const parentWrapper = e.target.closest('.img-wrapper');
+      if (parentWrapper && !parentWrapper.dataset.fallbackShown) {
+        parentWrapper.dataset.fallbackShown = 'true';
+        // subtle background change but still keep style professional
+        parentWrapper.style.background = '#11131f';
+        e.target.style.opacity = '0.5';
+        e.target.style.objectFit = 'contain';
+      }
+    }
+  }, true);
+</script>
 </body>
 </html>
