@@ -1,1 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Centrix Eduspace · Asset Vault Pro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at 20% 30%, #0a0f1e, #020617);
+      color: #eef2ff;
+      min-height: 100vh;
+    }
+
+    /* Login Screen */
+    #loginScreen {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.96);
+      backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .login-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(8, 12, 28, 0.98));
+      border-radius: 2rem;
+      padding: 2.5rem;
+      width: 380px;
+      text-align: center;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(56,189,248,0.2);
+    }
+
+    .login-card h2 {
+      font-size: 2rem;
+      background: linear-gradient(135deg, #fff, #7dd3fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 0.5rem 0;
+    }
+
+    .login-card p {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+    }
+
+    .input-group {
+      position: relative;
+      margin: 1.5rem 0;
+    }
+
+    .input-group i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5b6e8c;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 60px;
+      font-size: 1rem;
+      color: #e2e8f0;
+      transition: all 0.2s;
+    }
+
+    .login-card input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.2);
+      outline: none;
+    }
+
+    .login-card button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(105deg, #0ea5e9, #0284c7);
+      border: none;
+      border-radius: 60px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 1rem;
+    }
+
+    .login-card button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(14,165,233,0.3);
+    }
+
+    .secure-badge {
+      font-size: 0.7rem;
+      margin-top: 1.2rem;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .secure-badge i {
+      font-size: 0.65rem;
+      color: #5b6e8c;
+    }
+
+    #errorMsg {
+      color: #f87171;
+      font-size: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    /* Main Content */
+    .main-content { display: none; }
+
+    /* Premium Header */
+    .premium-header {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      background: linear-gradient(180deg, rgba(2,6,23,0.9), transparent);
+      border-bottom: 1px solid rgba(56,189,248,0.2);
+    }
+
+    .premium-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(to right, #e0f2fe, #38bdf8, #0ea5e9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .premium-header p {
+      color: #8ba0c2;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .high-res-badge {
+      background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(2,106,162,0.2));
+      border: 1px solid rgba(56,189,248,0.4);
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #7dd3fc;
+      letter-spacing: 0.3px;
+    }
+
+    /* Toolbar - Filter Only (No Search) */
+    .toolbar {
+      max-width: 1400px;
+      margin: 1.5rem auto 0;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filter-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      padding: 8px 20px;
+      background: rgba(15,23,42,0.6);
+      border: 1px solid #334155;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #cbd5e1;
+    }
+
+    .filter-chip:hover {
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+
+    .filter-chip.active {
+      background: linear-gradient(105deg, #0ea5e9, #0284c7);
+      border-color: #0ea5e9;
+      color: white;
+    }
+
+    .bulk-btn {
+      padding: 8px 24px;
+      background: linear-gradient(105deg, #10b981, #059669);
+      border: none;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .bulk-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(16,185,129,0.3);
+    }
+
+    /* Stats */
+    .stats {
+      max-width: 1400px;
+      margin: 1rem auto 0;
+      padding: 0 2rem;
+      font-size: 0.85rem;
+      color: #8ba0c2;
+    }
+
+    /* Asset Grid */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .asset-card {
+      background: rgba(8, 12, 28, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(56,189,248,0.2);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .asset-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(56,189,248,0.6);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.5);
+    }
+
+    .img-wrapper {
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      min-height: 200px;
+      position: relative;
+    }
+
+    .img-wrapper img {
+      max-width: 100%;
+      max-height: 120px;
+      object-fit: contain;
+      transition: transform 0.2s;
+    }
+
+    .zoom-icon {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .asset-card:hover .zoom-icon {
+      opacity: 1;
+    }
+
+    .card-info {
+      padding: 1rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filename {
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(15, 23, 42, 0.8);
+      padding: 5px 12px;
+      border-radius: 20px;
+      color: #b9d0f0;
+      font-family: monospace;
+      letter-spacing: -0.2px;
+    }
+
+    .download-btn {
+      background: rgba(56,189,248,0.15);
+      border: 1px solid #38bdf8;
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #7dd3fc;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .download-btn:hover {
+      background: #38bdf8;
+      color: #0a0f1e;
+      transform: scale(0.98);
+    }
+
+    /* Modal for Zoom */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 20000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 1rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .close-modal:hover {
+      opacity: 0.7;
+    }
+
+    .toast-msg {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0f172ae6;
+      backdrop-filter: blur(16px);
+      padding: 10px 28px;
+      border-radius: 80px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      white-space: nowrap;
+      font-family: monospace;
+      border-left: 3px solid #38bdf8;
+    }
+
+    .elegant-footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(56,189,248,0.15);
+      color: #5b6e8c;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 680px) {
+      .premium-header h1 { font-size: 2rem; }
+      .toolbar { flex-direction: column; align-items: stretch; }
+      .filter-buttons { justify-content: center; }
+      .bulk-btn { justify-content: center; }
+      .toast-msg { white-space: nowrap; font-size: 0.7rem; padding: 8px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="login-card">
+    <i class="fas fa-shield-alt" style="font-size: 2.8rem; color: #38bdf8; margin-bottom: 0.5rem;"></i>
+    <h2>Centrix Vault</h2>
+    <p>PROTECTED ASSETS · Authorized Access Only</p>
+    <div class="input-group">
+      <i class="fas fa-key"></i>
+      <input type="password" id="passwordInput" placeholder="Enter passphrase" autocomplete="off">
+    </div>
+    <button onclick="verifyAndUnlock()"><i class="fas fa-unlock-alt" style="margin-right: 8px;"></i> Access Vault</button>
+    <div id="errorMsg"></div>
+    <div class="secure-badge">
+      <span>🔐 internal use · secure gateway</span>
+    </div>
+  </div>
+</div>
+
+<div class="main-content" id="mainApp">
+  <div class="premium-header">
+    <h1>Centrix Eduspace</h1>
+    <p><i class="fas fa-crown"></i> Brand Identity Kit <span class="high-res-badge"><i class="fas fa-image"></i> high-res logos</span></p>
+  </div>
+
+  <div class="toolbar">
+    <div class="filter-buttons" id="filterButtons">
+      <span class="filter-chip active" data-filter="all">✨ All Assets</span>
+      <span class="filter-chip" data-filter="black">⚫ Black</span>
+      <span class="filter-chip" data-filter="white">⚪ White</span>
+      <span class="filter-chip" data-filter="other">📁 Other</span>
+    </div>
+    <button class="bulk-btn" id="bulkDownloadBtn"><i class="fas fa-download"></i> Download All (ZIP)</button>
+  </div>
+  <div class="stats" id="stats"></div>
+
+  <div class="container">
+    <div class="asset-grid" id="assetGrid"></div>
+  </div>
+  <div class="elegant-footer">
+    <i class="far fa-copyright"></i> 2026 Centrix Eduspace — Confidential Brand Assets
+  </div>
+</div>
+
+<div id="toastMsg" class="toast-msg"></div>
+<div id="imageModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeModal()">&times;</button>
+    <img id="modalImage" src="" alt="Preview">
+  </div>
+</div>
+
+<script>
+  const assets = [
+    { file: "1769247091349.png", displayName: "Stamp Icon", category: "icon" },
+    { file: "CENTRIX CAROSUEL POST.jpg.jpeg", displayName: "Carousel Poster", category: "logo" },
+    { file: "CENTRIX LOGO FULL BLACK.png", displayName: "Logo Full Black", category: "logo", color: "black" },
+    { file: "CENTRIX LOGO ICON BLACK.png", displayName: "Icon Black", category: "icon", color: "black" },
+    { file: "CENTRIX LOGO ICON FULL BLACK .png", displayName: "Icon Full Black", category: "icon", color: "black" },
+    { file: "CENTRIX LOGO ICON FULL WHITE.png", displayName: "Icon Full White", category: "icon", color: "white" },
+    { file: "CENTRIX LOGO ICON WHITE.png", displayName: "Icon White", category: "icon", color: "white" },
+    { file: "CENTRIX LOGO-01.png", displayName: "Logo Variant 01", category: "logo" },
+    { file: "CENTRIX LOGO-02.png", displayName: "Logo Variant 02", category: "logo" },
+    { file: "CENTRIX LOGO-04.png", displayName: "Logo Variant 04", category: "logo" },
+    { file: "Photoroom-20260220_094259054.png", displayName: "Photoroom Render", category: "logo" }
+  ];
+
+  let currentFilter = "all";
+
+  function showToast(msg) {
+    const toast = document.getElementById("toastMsg");
+    toast.innerText = msg;
+    toast.style.opacity = "1";
+    setTimeout(() => toast.style.opacity = "0", 2000);
+  }
+
+  function renderAssets() {
+    const filtered = assets.filter(asset => {
+      if (currentFilter === "all") return true;
+      if (currentFilter === "black") return asset.color === "black";
+      if (currentFilter === "white") return asset.color === "white";
+      if (currentFilter === "other") return !asset.color;
+      return false;
+    });
+
+    const grid = document.getElementById("assetGrid");
+    const stats = document.getElementById("stats");
+    stats.innerHTML = `<i class="fas fa-images"></i> Showing ${filtered.length} of ${assets.length} premium assets`;
+
+    grid.innerHTML = filtered.map(asset => `
+      <div class="asset-card">
+        <div class="img-wrapper" onclick="openModal('${asset.file}')">
+          <img src="${asset.file}" alt="${asset.displayName}" loading="lazy" 
+            onerror="this.src='https://placehold.co/400x200?text=Preview+Unavailable&bg=0f172a&text=8ba0c2'; this.style.opacity='0.7';">
+          <div class="zoom-icon"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="card-info">
+          <span class="filename"><i class="far fa-file-image"></i> ${asset.displayName}</span>
+          <a href="${asset.file}" class="download-btn" download="${asset.file}" onclick="showToast('📥 Downloading ${asset.displayName}')">
+            <i class="fas fa-download"></i> Get
+          </a>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function openModal(imgSrc) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    modalImg.src = imgSrc;
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+
+  function bulkDownload() {
+    const filtered = assets.filter(asset => {
+      if (currentFilter === "all") return true;
+      if (currentFilter === "black") return asset.color === "black";
+      if (currentFilter === "white") return asset.color === "white";
+      if (currentFilter === "other") return !asset.color;
+      return false;
+    });
+
+    if (filtered.length === 0) {
+      showToast("No assets to download");
+      return;
+    }
+
+    showToast(`📦 Downloading ${filtered.length} assets...`);
+    filtered.forEach((asset, index) => {
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = asset.file;
+        link.download = asset.file;
+        link.click();
+      }, index * 250);
+    });
+  }
+
+  function verifyAndUnlock() {
+    const input = document.getElementById("passwordInput").value;
+    if (input === "logo123") {
+      document.getElementById("loginScreen").style.display = "none";
+      document.getElementById("mainApp").style.display = "block";
+      renderAssets();
+      showToast("✨ Welcome to Centrix Vault");
+    } else {
+      const errorDiv = document.getElementById("errorMsg");
+      errorDiv.innerHTML = '<i class="fas fa-times-circle"></i> Incorrect passphrase · Access denied';
+      errorDiv.style.color = "#f87171";
+      document.getElementById("passwordInput").value = "";
+      document.getElementById("passwordInput").focus();
+    }
+  }
+
+  // Event Listeners
+  document.querySelectorAll(".filter-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      document.querySelectorAll(".filter-chip").forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      currentFilter = chip.dataset.filter;
+      renderAssets();
+    });
+  });
+
+  document.getElementById("bulkDownloadBtn")?.addEventListener("click", bulkDownload);
+
+  document.getElementById("passwordInput")?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") verifyAndUnlock();
+  });
+
+  // Close modal on escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  window.addEventListener("click", (e) => {
+    const modal = document.getElementById("imageModal");
+    if (e.target === modal) closeModal();
+  });
+</script>
+</body>
+</html>
