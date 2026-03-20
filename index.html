@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centrix Eduspace Assets</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* HEADER */
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: #020617;
+    border-bottom: 1px solid #1e293b;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+p {
+    color: #94a3b8;
+}
+
+/* GRID */
+.container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+}
+
+.card img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.title {
+    margin: 12px 0 5px;
+    font-size: 15px;
+}
+
+.type {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 14px;
+    margin-top: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    background: #38bdf8;
+    color: black;
+    font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+/* LOGIN SCREEN */
+#loginScreen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #020617;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.login-box {
+    background: #0f172a;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid #1e293b;
+    width: 300px;
+}
+
+.login-box h2 {
+    margin-bottom: 10px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.login-box button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #38bdf8;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#errorMsg {
+    color: red;
+    margin-top: 10px;
+    font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+    <div class="login-box">
+        <h2>Centrix Eduspace Assets</h2>
+        <p>Enter password to continue</p>
+        <input type="password" id="passwordInput" placeholder="Enter password">
+        <button onclick="checkPassword()">Access</button>
+        <p id="errorMsg"></p>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<header>
+    <h1>Centrix Eduspace Assets</h1>
+    <p>Official logos and resources for internal team use</p>
+</header>
+
+<div class="container">
+    <div class="grid">
+
+        <div class="card">
+            <img src="logos/logo.png" alt="Main Logo">
+            <div class="title">Main Logo</div>
+            <div class="type">PNG • Transparent</div>
+            <a class="btn" href="logos/logo.png" download>Download</a>
+        </div>
+
+        <div class="card">
+            <img src="logos/logo-white.png" alt="White Logo">
+            <div class="title">White Logo</div>
+            <div class="type">PNG • Light Background</div>
+            <a class="btn" href="logos/logo-white.png" download>Download</a>
+        </div>
+
+        <div class="card">
+            <img src="logos/logo-dark.png" alt="Dark Logo">
+            <div class="title">Dark Logo</div>
+            <div class="type">PNG • Dark Background</div>
+            <a class="btn" href="logos/logo-dark.png" download>Download</a>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 Centrix Eduspace • Internal Asset Library
+</footer>
+
+<!-- SCRIPT -->
+<script>
+function checkPassword() {
+    var password = "logo123";
+    var input = document.getElementById("passwordInput").value;
+
+    if (input === password) {
+        document.getElementById("loginScreen").style.display = "none";
+    } else {
+        document.getElementById("errorMsg").innerText = "Incorrect password";
+    }
+}
+</script>
+
+</body>
+</html>
